@@ -57,16 +57,6 @@ public class MainViewController {
           return;
         }
 
-        if (string.startsWith("\"") && string.endsWith("\"") && string.length() != 1) {
-          string = string.substring(1, string.length() - 1);
-        }
-
-        if (token.equals(Token.Comentario)) {
-          string = string.replace("\\\\", "");
-        }
-
-        string = string.replace("\\\"", "\"");
-
         output += token +
             " (" + string + "," + token.getNumber() + "," + token.getTablePosition() + ","
             + (lexer.getLine() + 1) + ")\n";
