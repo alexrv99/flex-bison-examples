@@ -1,0 +1,4 @@
+PROC cuadr
+  miSuma = 234 + LEER
+  SI miSuma >= 500
+    ESCRIBIR "Es mayor a 500"
