@@ -44,6 +44,7 @@ OR {lexeme=yytext(); return Or;}
 "*" {lexeme=yytext(); return Multiplicacion;}
 "/" {lexeme=yytext(); return Division;}
 "=" {lexeme=yytext(); return Igual;}
+"==" {lexeme=yytext(); return IgualIgual;}
 ">=" {lexeme=yytext(); return MayorIgual;}
 ">" {lexeme=yytext(); return Mayor;}
 "<=" {lexeme=yytext(); return MenorIgual;}

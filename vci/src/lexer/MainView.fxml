@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="412.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lexer.MainViewController">
+<AnchorPane prefHeight="412.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lexer.MainViewController">
    <children>
       <HBox alignment="CENTER" layoutX="51.0" layoutY="63.0" spacing="10.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
          <children>
@@ -27,7 +27,7 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Label text="Tabla de tokens" textFill="#4a4a4a" VBox.vgrow="ALWAYS">
+                  <Label text="VCI" textFill="#4a4a4a" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="Roboto Medium" size="24.0" />
                      </font>
@@ -40,17 +40,7 @@
       <Button fx:id="btnAnalyze" defaultButton="true" layoutX="700.0" layoutY="376.0" mnemonicParsing="false" onAction="#analyze" prefHeight="11.0" prefWidth="93.0" text="Analizar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0">
          <font>
             <Font name="Roboto Medium" size="14.0" />
-         </font></Button>
-      <VBox layoutX="20.0" layoutY="375.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0">
-         <children>
-            <Label text="Creado por:">
-               <font>
-                  <Font name="Roboto Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label text="Luis Andrés Peña Castillo" />
-            <Label layoutX="10.0" layoutY="10.0" text="Alejandro Alberto Ramírez Vilchis" />
-         </children>
-      </VBox>
+         </font>
+      </Button>
    </children>
 </AnchorPane>
