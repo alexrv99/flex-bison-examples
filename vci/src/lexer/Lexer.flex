@@ -61,7 +61,7 @@ OR {lexeme=yytext(); return Or;}
 "||" {lexeme=yytext(); return LogicoOR;}
 "!" {lexeme=yytext(); return Negacion;}
 
-{LU}{LorD} {lexeme=yytext(); return Identificador;}
+{LU}({LorD})* {lexeme=yytext(); return Identificador;}
 {D}+ {lexeme=yytext(); return Enteros;}
 ({D}+"."{D}+) {lexeme=yytext(); return Reales;}
 {CA}+ {lexeme=yytext(); return Cadena;}

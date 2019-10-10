@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Reader;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -61,6 +60,10 @@ public class MainViewController {
 
 
                 if (token == null) {
+                    vci.forEach(vciElement -> {
+                        System.out.println("[" + vciElement.getString() + "]");
+                        output.append(" [").append(vciElement.getString()).append("]\t").append(vciElement.getToken()).append(" \n");
+                    });
                     output.append("Completado");
                     txtOutput.setText(output.toString());
                     break;
@@ -101,7 +104,7 @@ public class MainViewController {
                     VciElement ultimo = op.peek();
                     System.out.println("This is the last: " + ultimo);
                     // si es el primero
-                    if (vciElement.getPriority() < ultimo.getPriority()) {
+                    if (vciElement.getPriority() <= ultimo.getPriority()) {
                         VciElement operador = op.pop();
                         vci.add(operador);
                     }
@@ -109,10 +112,7 @@ public class MainViewController {
                 }
             }
 
-            vci.forEach(vciElement -> {
-                System.out.println("[" + vciElement.getString() + "]");
-                output.append(" [").append(vciElement.getString()).append("]").append(vciElement.getToken()).append(" \n");
-            });
+
         } catch (IOException e) {
             e.printStackTrace();
         }

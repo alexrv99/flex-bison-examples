@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86d42b45-b8d7-455f-92d2-7dadc20eedd8" name="Default Changelist" comment="Optimiza tests">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/javafx_sdk_11_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lexer/VciElement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/lexer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/lexer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/archivo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/archivo.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/Lexer.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Lexer.flex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Lexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Token.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -199,6 +191,8 @@
       <workItem from="1569418424385" duration="222000" />
       <workItem from="1570594077884" duration="4467000" />
       <workItem from="1570626687203" duration="4308000" />
+      <workItem from="1570720600020" duration="750000" />
+      <workItem from="1570721403304" duration="3118000" />
     </task>
     <task id="LOCAL-00001" summary="Detección de coma">
       <created>1557094056581</created>
