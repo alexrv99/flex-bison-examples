@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="vci:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="86d42b45-b8d7-455f-92d2-7dadc20eedd8" name="Default Changelist" comment="Optimiza tests">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/vci_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/javafx-sdk-11.0.2/lib/.idea/lib.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/lexer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/lexer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/JFlex.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/JFlex.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/JFlex__2_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx_sdk_11_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archivo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/archivo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Lexer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainViewController.java" afterDir="false" />
     </list>
@@ -29,6 +45,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="true" />
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
@@ -41,7 +58,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="/usr/lib/jvm/javafx-sdk-11.0.2/lib" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Projects/JavaWorkspace/PicArtApp-api" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -51,7 +68,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -191,6 +208,8 @@
       <workItem from="1570626687203" duration="4308000" />
       <workItem from="1570720600020" duration="750000" />
       <workItem from="1570721403304" duration="4773000" />
+      <workItem from="1570757078826" duration="9241000" />
+      <workItem from="1570797011778" duration="2637000" />
     </task>
     <task id="LOCAL-00001" summary="Detección de coma">
       <created>1557094056581</created>

@@ -12,11 +12,13 @@ import java.util.List;
 import java.util.Stack;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 
 public class MainViewController {
 
@@ -24,16 +26,12 @@ public class MainViewController {
     private TextArea txtInput;
 
     @FXML
-    private TextArea txtOutput;
-
-    @FXML
-    private Button btnAnalyze;
-
-    @FXML
-    private AnchorPane visualVci;
+    private FlowPane flowPane;
 
 
     public void initialize() {
+        flowPane.setVgap(10);
+        flowPane.setHgap(10);
         txtInput.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER && event.isControlDown()) {
                 analyze();
@@ -42,8 +40,7 @@ public class MainViewController {
     }
 
     public void analyze() {
-        GridPane grid = new GridPane();
-        visualVci.getChildren().add(grid);
+
 
         File archivo = new File("archivo.txt");
         PrintWriter printWriter;
@@ -72,8 +69,27 @@ public class MainViewController {
                         System.out.println("[" + vciElement.getString() + "]");
                         output.append(" [").append(vciElement.getString()).append("]\t").append(vciElement.getToken()).append(" \n");
                     });
+                    flowPane.getChildren().clear();
+                    for (int i = 0; i < vci.size(); i++) {
+                        VciElement vciElement = vci.get(i);
+                        VBox vBox = new VBox();
+                        vBox.setSpacing(5);
+                        vBox.setPadding(new Insets(15, 30, 15, 30));
+                        vBox.setStyle("-fx-border-color: #c5c5c5; -fx-border-width: 1px; -fx-border-style: solid; -fx-border-radius: 10px");
+                        vBox.setAlignment(Pos.CENTER);
+
+
+                        Label tokenLabel = new Label(vciElement.getString());
+                        tokenLabel.setStyle("-fx-font-size: 25px");
+
+                        Label numberLabel = new Label(String.valueOf(i));
+                        vBox.getChildren().add(tokenLabel);
+                        vBox.getChildren().add(numberLabel);
+
+                        flowPane.getChildren().add(vBox);
+                    }
                     output.append("Completado");
-                    txtOutput.setText(output.toString());
+
                     break;
                 }
 
@@ -93,27 +109,26 @@ public class MainViewController {
                     }
                     op.pop(); // quitar parentesis que cierra
                 } else if (vciElement.getToken().equals(Token.Identificador) || vciElement.getToken().equals(Token.Enteros)) {
+                    // Estos tokens se agregan directamente a la pila
                     vci.add(vciElement);
-                }
-                else if (vciElement.getToken().equals(Token.PuntoYComa)) {
+                } else if (vciElement.getToken().equals(Token.PuntoYComa)) {
+                    // Vaciar pila de operadores
                     while (!op.isEmpty()) {
                         VciElement operador = op.pop();
                         vci.add(operador);
                     }
-                }
-                else {
-                    // Para operadores
+                } else {
+                    // Para los operadores
 
                     if (op.isEmpty()) {
                         op.push(vciElement);
                         continue;
                     }
 
-                    VciElement ultimo = op.peek();
-                    System.out.println("This is the last: " + ultimo);
                     // si es el primero
-                    if (vciElement.getPriority() <= ultimo.getPriority()) {
+                    while (!op.isEmpty() && vciElement.getPriority() <= op.peek().getPriority()) {
                         VciElement operador = op.pop();
+                        System.out.println("Popped: " + operador);
                         vci.add(operador);
                     }
                     op.push(vciElement);
