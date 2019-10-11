@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 
 public class MainViewController {
 
@@ -27,6 +29,9 @@ public class MainViewController {
     @FXML
     private Button btnAnalyze;
 
+    @FXML
+    private AnchorPane visualVci;
+
 
     public void initialize() {
         txtInput.setOnKeyPressed(event -> {
@@ -37,6 +42,9 @@ public class MainViewController {
     }
 
     public void analyze() {
+        GridPane grid = new GridPane();
+        visualVci.getChildren().add(grid);
+
         File archivo = new File("archivo.txt");
         PrintWriter printWriter;
         try {
