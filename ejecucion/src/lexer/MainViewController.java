@@ -1,25 +1,20 @@
 package lexer;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Reader;
+import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
-
-import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.*;
 
 public class MainViewController {
 
@@ -31,6 +26,16 @@ public class MainViewController {
 
     @FXML
     private FlowPane flowPane;
+
+    @FXML
+    private HBox hBoxStack;
+
+    @FXML
+    private Label lblError;
+
+    private int column = 0;
+
+    private boolean poppedLast = false;
 
 
     public void initialize() {
@@ -44,6 +49,7 @@ public class MainViewController {
     }
 
     public void analyze() {
+
 
 
         File archivo = new File("archivo.txt");
@@ -78,6 +84,7 @@ public class MainViewController {
             e.printStackTrace();
             return;
         }
+        elements.forEach(System.out::println);
 
 
         StringBuilder output = new StringBuilder();
@@ -132,6 +139,8 @@ public class MainViewController {
                     vci.set(position, new VciElement(null, String.valueOf(vci.size()), null));
                 }
 
+            } else if (token.equals(Token.Read) || token.equals(Token.Write)) {
+                vci.add(vciElement);
             } else {
                 // Para los operadores
 
@@ -155,6 +164,8 @@ public class MainViewController {
             output.append(" [").append(vciElement.getString()).append("]\t").append(vciElement.getToken()).append(" \n");
         });
         flowPane.getChildren().clear();
+
+
         for (int i = 0; i < vci.size(); i++) {
             VciElement vciElement = vci.get(i);
             VBox vBox = new VBox();
@@ -176,113 +187,162 @@ public class MainViewController {
         output.append("Completado");
 
 
-        HashMap<String, Double> symbolsTable = new HashMap<>();
-        symbolsTable.put("Y", 62.0);
-        symbolsTable.put("X", 2.0);
+        // ############### INICIO DE EJECUCION ###############
 
-        Stack<String> ej = new Stack<>();
+        HashMap<String, Double> symbolsTable = null;
+        try {
+            hBoxStack.getChildren().clear();
+            txtOutput.clear();
+            column = 0;
+            lblError.setVisible(false);
 
-        for (int i = 0; i < vci.size(); i++) {
-            VciElement vciElement = vci.get(i);
-            System.out.println(vciElement);
+
+            symbolsTable = new HashMap<>();
+
+            Stack<String> ej = new Stack<>();
+
+            for (int i = 0; i < vci.size(); i++) {
+                VciElement vciElement = vci.get(i);
 
 
-            if (vciElement.getToken() == null) {
-                ej.push(vciElement.getString());
-            } // operadores binarios
-            else if (vciElement.getToken().getPriority() != null && vciElement.getToken().getPriority() != 0 && vciElement.getToken().getPriority() != 30) {
+                if (vciElement.getToken() == null) {
+                    addToExecutionStack(vciElement.getString(), ej);
+                } // operadores binarios
+                else if (vciElement.getToken().getPriority() != null && vciElement.getToken().getPriority() != 0 && vciElement.getToken().getPriority() != 30) {
 
-                double operand2 = 0;
-                String item = ej.pop();
-                try {
-                    operand2 = Double.parseDouble(item);
-                } catch (NumberFormatException e) {
-                    operand2 = symbolsTable.get(item);
+                    double operand2 = 0;
+                    String item = removeFromExecutionStack(ej);
+                    try {
+                        operand2 = Double.parseDouble(item);
+                    } catch (NumberFormatException e) {
+                        operand2 = symbolsTable.get(item);
+                    }
+
+                    double operand1 = 0;
+                    item = removeFromExecutionStack(ej);
+                    try {
+                        operand1 = Double.parseDouble(item);
+                    } catch (NumberFormatException e) {
+                        operand1 = symbolsTable.get(item);
+                    }
+
+                    double res = 0;
+                    switch (vciElement.getToken()) {
+                        case Suma:
+                            res = operand1 + operand2;
+                            break;
+                        case Resta:
+                            res = operand1 - operand2;
+                            break;
+                        case Multiplicacion:
+                            res = operand1 * operand2;
+                            break;
+                        case Division:
+                            res = operand1 / operand2;
+                            break;
+                        case LogicoAND:
+                            res = (operand1 == 1) && (operand2 == 1) ? 1 : 0;
+                            break;
+                        case LogicoOR:
+                            res = (operand1 == 1) || (operand2 == 1) ? 1 : 0;
+                            break;
+                        case IgualIgual:
+                            res = operand1 == operand2 ? 1 : 0;
+                            break;
+                        case Menor:
+                            res = operand1 < operand2 ? 1 : 0;
+                            break;
+                        case MenorIgual:
+                            res = operand1 <= operand2 ? 1 : 0;
+                            break;
+                        case Mayor:
+                            res = operand1 > operand2 ? 1 : 0;
+                            break;
+                        case MayorIgual:
+                            res = operand1 >= operand2 ? 1 : 0;
+                            break;
+                        case Diferente:
+                            res = operand1 != operand2 ? 1 : 0;
+                            break;
+                    }
+                    System.out.println("Result of " + operand1 + vciElement.getString() + operand2 + ": " + res);
+                    addToExecutionStack(String.valueOf(res), ej);
+                } else if (vciElement.getToken().equals(Token.Negacion)) {
+                    int num = Integer.parseInt(removeFromExecutionStack(ej));
+                    num = num == 1 ? 0 : 1;
+                    addToExecutionStack(String.valueOf(num), ej);
+                } else if (vciElement.getToken().equals(Token.Igual)) {
+                    double value = Double.parseDouble(removeFromExecutionStack(ej));
+                    String identifier = removeFromExecutionStack(ej);
+                    symbolsTable.put(identifier, value);
+                } else if (vciElement.getToken().equals(Token.Enteros) || vciElement.getToken().equals(Token.Identificador)) {
+                    addToExecutionStack(vciElement.getString(), ej);
+                } else if (vciElement.getToken().equals(Token.Write)) {
+                    VciElement nextVciElement = vci.get(i + 1);
+                    i++; // saltar siguiente valor
+                    String item = nextVciElement.getString();
+                    double value;
+                    try {
+                        value = Double.parseDouble(item);
+                    } catch (NumberFormatException e) {
+                        value = symbolsTable.get(item);
+                    }
+                    System.out.println("[PANTALLA] " + value);
+                    txtOutput.setText(txtOutput.getText() + value + "\n");
+                } else if (vciElement.getToken().equals(Token.Read)) {
+                    i++; // saltar siguiente valor
+                } else if (vciElement.getToken().equals(Token.Then)) {
+                    double pcAux = Double.parseDouble(removeFromExecutionStack(ej));
+                    System.out.println("pc_aux: " + pcAux);
+                    double vv = Double.parseDouble(removeFromExecutionStack(ej));
+                    System.out.println("vv: " + vv);
+                    if (vv == 0) {
+                        i = (int) pcAux - 1; // minus 1 because the for increments already
+                    }
+                } else if (vciElement.getToken().equals(Token.Else)) {
+                    i = Integer.parseInt(removeFromExecutionStack(ej)) - 1; // salto incondicional
                 }
-
-                double operand1 = 0;
-                item = ej.pop();
-                try {
-                    operand1 = Double.parseDouble(item);
-                } catch (NumberFormatException e) {
-                    operand1 = symbolsTable.get(item);
-                }
-
-                double res = 0;
-                switch (vciElement.getToken()) {
-                    case Suma:
-                        res = operand1 + operand2;
-                        break;
-                    case Resta:
-                        res = operand1 - operand2;
-                        break;
-                    case Multiplicacion:
-                        res = operand1 * operand2;
-                        break;
-                    case Division:
-                        res = operand1 / operand2;
-                        break;
-                    case LogicoAND:
-                        res = (operand1 == 1) && (operand2 == 1) ? 1 : 0;
-                        break;
-                    case LogicoOR:
-                        res = (operand1 == 1) || (operand2 == 1) ? 1 : 0;
-                        break;
-                    case IgualIgual:
-                        res = operand1 == operand2 ? 1 : 0;
-                        break;
-                    case Menor:
-                        res = operand1 < operand2 ? 1 : 0;
-                        break;
-                    case MenorIgual:
-                        res = operand1 <= operand2 ? 1 : 0;
-                        break;
-                    case Mayor:
-                        res = operand1 > operand2 ? 1 : 0;
-                        break;
-                    case MayorIgual:
-                        res = operand1 >= operand2 ? 1 : 0;
-                        break;
-                    case Diferente:
-                        res = operand1 != operand2 ? 1 : 0;
-                        break;
-                }
-                System.out.println("Result of " + operand1 + vciElement.getString() + operand2 + ": " + res);
-                ej.push(String.valueOf(res));
-            } else if (vciElement.getToken().equals(Token.Negacion)) {
-                int num = Integer.parseInt(ej.pop());
-                num = num == 1 ? 0 : 1;
-                ej.push(String.valueOf(num));
-            } else if (vciElement.getToken().equals(Token.Igual)) {
-                double value = Double.parseDouble(ej.pop());
-                String identifier = ej.pop();
-                symbolsTable.put(identifier, value);
-            } else if (vciElement.getToken().equals(Token.Enteros) || vciElement.getToken().equals(Token.Identificador)) {
-                ej.push(vciElement.getString());
-                System.out.println("Pushed: " + vciElement.getString());
-            } else if (vciElement.getToken().equals(Token.Write)) {
-                System.out.println("WRITEEEEEEE");
-                double value;
-                String item = ej.pop();
-                try {
-                    value = Double.parseDouble(item);
-                } catch (NumberFormatException e) {
-                    value = symbolsTable.get(item);
-                }
-                System.out.println("[PANTALLA] " + value);
-                txtOutput.setText(txtOutput.getText() + value + "\n");
-            } else if (vciElement.getToken().equals(Token.Then)) {
-                double pcAux = Double.parseDouble(ej.pop());
-                System.out.println("pc_aux: " + pcAux);
-                double vv = Double.parseDouble(ej.pop());
-                System.out.println("vv: " + vv);
-                if (vv == 0) {
-                    i = (int) pcAux - 1; // minus 1 because the for increments already
-                }
-            } else if (vciElement.getToken().equals(Token.Else)) {
-                i = Integer.parseInt(ej.pop()) - 1; // salto incondicional
             }
+        } catch (Exception e) {
+            lblError.setVisible(true);
         }
         System.out.println(symbolsTable);
+    }
+
+    private void addToExecutionStack(String string, Stack<String> stack) {
+        stack.push(string);
+        System.out.println("size: " + stack.size());
+
+        if (hBoxStack.getChildren().isEmpty()) {
+            VBox vbox = new VBox();
+            vbox.setAlignment(Pos.BOTTOM_CENTER);
+            vbox.setSpacing(10);
+            hBoxStack.getChildren().add(vbox);
+        }
+
+        if (poppedLast) {
+            column++;
+            poppedLast = false;
+
+            VBox vbox = new VBox();
+            vbox.setAlignment(Pos.BOTTOM_CENTER);
+            vbox.setSpacing(10);
+            hBoxStack.getChildren().add(vbox);
+            VBox vBox = (VBox) hBoxStack.getChildren().get(column);
+            for (int i = 0; i < stack.size() - 1; i++) {
+                Label stringLabel = new Label();
+                stringLabel.setStyle("-fx-strikethrough: true; -fx-font-size: 16px; -fx-padding: 5px 10px");
+                vBox.getChildren().add(0, stringLabel);
+            }
+        }
+        VBox vBox = (VBox) hBoxStack.getChildren().get(column);
+        Label stringLabel = new Label(string);
+        stringLabel.setStyle("-fx-strikethrough: true; -fx-font-size: 16px; -fx-padding: 5px 10px");
+        vBox.getChildren().add(0, stringLabel);
+    }
+
+    private String removeFromExecutionStack(Stack<String> stack) {
+        poppedLast = true;
+        return stack.pop();
     }
 }

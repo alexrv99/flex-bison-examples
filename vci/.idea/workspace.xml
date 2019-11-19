@@ -6,22 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86d42b45-b8d7-455f-92d2-7dadc20eedd8" name="Default Changelist" comment="Optimiza tests">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/vci_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/javafx-sdk-11.0.2/lib/.idea/lib.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/lexer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/lexer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/JFlex.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/JFlex.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/JFlex__2_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx_sdk_11_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/archivo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/archivo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Lexer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainViewController.java" afterDir="false" />
-    </list>
+    <list default="true" id="86d42b45-b8d7-455f-92d2-7dadc20eedd8" name="Default Changelist" comment="Optimiza tests" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +43,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Projects/JavaWorkspace/PicArtApp-api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ejecucion" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />

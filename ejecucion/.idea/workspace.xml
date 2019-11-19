@@ -2,25 +2,32 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="vci:jar" />
+      <artifact name="lexer:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86d42b45-b8d7-455f-92d2-7dadc20eedd8" name="Default Changelist" comment="Optimiza tests">
-      <change afterPath="$PROJECT_DIR$/src/lexer/LexerElement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/lexer_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/vci_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/archivo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/archivo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/Lexer.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Lexer.flex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifest.mf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Lexer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lexer/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vci/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../vci/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vci/src/lexer/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/../vci/src/lexer/MainView.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -53,7 +60,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
     <property name="create.test.in.the.same.root" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../Projects/JavaWorkspace/AlgoPractice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/javafx-sdk-11.0.2/lib" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -207,6 +214,7 @@
       <workItem from="1570797011778" duration="3914000" />
       <workItem from="1573189577907" duration="103000" />
       <workItem from="1574108757852" duration="14133000" />
+      <workItem from="1574131629194" duration="9143000" />
     </task>
     <task id="LOCAL-00001" summary="Detección de coma">
       <created>1557094056581</created>

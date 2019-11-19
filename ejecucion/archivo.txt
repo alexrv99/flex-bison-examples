@@ -1,6 +1,12 @@
-A = 10;
-IF (A==10) THEN
+Y=63;
+X=20;
+IF (Y==63) THEN
 BEGIN
-    A=20+10/2;
-    WRITE(A);
+    READ(X);
+    Y = X + 10;
+END
+ELSE
+BEGIN
+    X = 20;
+    Y = X + Y;
 END
