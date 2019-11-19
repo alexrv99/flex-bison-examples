@@ -51,7 +51,6 @@ public class MainViewController {
     public void analyze() {
 
 
-
         File archivo = new File("archivo.txt");
         PrintWriter printWriter;
         try {
@@ -86,78 +85,87 @@ public class MainViewController {
         }
         elements.forEach(System.out::println);
 
-
-        StringBuilder output = new StringBuilder();
-        for (int i = 0; i < elements.size(); i++) {
-            LexerElement element = elements.get(i);
-            Token token = element.getToken();
-            String string = element.getString();
-
-
-            VciElement vciElement = new VciElement(token, string, token.getPriority());
+        StringBuilder output;
+        try {
+            output = new StringBuilder();
+            for (int i = 0; i < elements.size(); i++) {
+                LexerElement element = elements.get(i);
+                Token token = element.getToken();
+                String string = element.getString();
 
 
-            // Logica del VCI
-            if (token.equals(Token.AbreParentesis)) {
-                op.push(vciElement); // sin preguntar
-            } else if (token.equals(Token.CierraParentesis)) {
-                // vacia la pila hasta el primer parentesis
-                while (!op.peek().getToken().equals(Token.AbreParentesis)) {
-                    VciElement operador = op.pop();
-                    vci.add(operador);
-                }
-                op.pop(); // quitar parentesis que cierra
-            } else if (vciElement.getToken().equals(Token.Identificador) || vciElement.getToken().equals(Token.Enteros)) {
-                // Estos tokens se agregan directamente a la pila
-                vci.add(vciElement);
-            } else if (vciElement.getToken().equals(Token.PuntoYComa)) {
-                // Vaciar pila de operadores
-                while (!op.isEmpty()) {
-                    VciElement operador = op.pop();
-                    vci.add(operador);
-                }
-            } else if (token.equals(Token.If)) {
-                est.push(vciElement);
-            } else if (token.equals(Token.Then)) {
-                op.clear();
-                dir.push(vci.size());
-                vci.add(null);
-                vci.add(vciElement);
-            } else if (token.equals(Token.Else)) {
-                est.push(vciElement);
-                int position = dir.pop();
-                vci.set(position, new VciElement(null, String.valueOf(vci.size() + 2), null));
-                dir.push(vci.size());
-                vci.add(null); // token falso
-                vci.add(vciElement); // genera token else
-            } else if (token.equals(Token.End)) {
-                if ((i + 1) == elements.size()) {
+                VciElement vciElement = new VciElement(token, string, token.getPriority());
+
+
+                // Logica del VCI
+                if (token.equals(Token.AbreParentesis)) {
+                    op.push(vciElement); // sin preguntar
+                } else if (token.equals(Token.CierraParentesis)) {
+                    // vacia la pila hasta el primer parentesis
+                    while (!op.peek().getToken().equals(Token.AbreParentesis)) {
+                        VciElement operador = op.pop();
+                        vci.add(operador);
+                    }
+                    op.pop(); // quitar parentesis que cierra
+                } else if (vciElement.getToken().equals(Token.Identificador) || vciElement.getToken().equals(Token.Enteros)) {
+                    // Estos tokens se agregan directamente a la pila
+                    vci.add(vciElement);
+                } else if (vciElement.getToken().equals(Token.PuntoYComa)) {
+                    // Vaciar pila de operadores
+                    while (!op.isEmpty()) {
+                        VciElement operador = op.pop();
+                        vci.add(operador);
+                    }
+                } else if (token.equals(Token.If)) {
+                    est.push(vciElement);
+                } else if (token.equals(Token.Then)) {
+                    op.clear();
+                    dir.push(vci.size());
+                    vci.add(null);
+                    vci.add(vciElement);
+                } else if (token.equals(Token.Else)) {
+                    est.push(vciElement);
                     int position = dir.pop();
-                    vci.set(position, new VciElement(null, String.valueOf(vci.size()), null));
-                } else if (!elements.get(i + 1).getToken().equals(Token.Else)) {
-                    int position = dir.pop();
-                    vci.set(position, new VciElement(null, String.valueOf(vci.size()), null));
-                }
+                    vci.set(position, new VciElement(null, String.valueOf(vci.size() + 2), null));
+                    dir.push(vci.size());
+                    vci.add(null); // token falso
+                    vci.add(vciElement); // genera token else
+                } else if (token.equals(Token.End)) {
+                    if ((i + 1) == elements.size()) {
+                        int position = dir.pop();
+                        vci.set(position, new VciElement(null, String.valueOf(vci.size()), null));
+                    } else if (!elements.get(i + 1).getToken().equals(Token.Else)) {
+                        int position = dir.pop();
+                        vci.set(position, new VciElement(null, String.valueOf(vci.size()), null));
+                    }
 
-            } else if (token.equals(Token.Read) || token.equals(Token.Write)) {
-                vci.add(vciElement);
-            } else {
-                // Para los operadores
+                } else if (token.equals(Token.Read) || token.equals(Token.Write)) {
+                    vci.add(vciElement);
+                } else if (token.equals(Token.Cadena)) {
+                    System.out.println("Added cadena: " + string);
+                    vci.add(vciElement);
+                } else {
+                    // Para los operadores
 
-                if (op.isEmpty()) {
+                    if (op.isEmpty()) {
+                        op.push(vciElement);
+                        continue;
+                    }
+
+                    // si es el primero
+                    while (!op.isEmpty() && vciElement.getPriority() <= op.peek().getPriority()) {
+                        VciElement operador = op.pop();
+                        vci.add(operador);
+                    }
                     op.push(vciElement);
-                    continue;
                 }
-
-                // si es el primero
-                while (!op.isEmpty() && vciElement.getPriority() <= op.peek().getPriority()) {
-                    VciElement operador = op.pop();
-                    vci.add(operador);
-                }
-                op.push(vciElement);
             }
+        } catch (Exception e) {
+            lblError.setVisible(true);
+            lblError.setText("Ha ocurrido un error lexico");
+            e.printStackTrace();
+            return;
         }
-
 
         vci.forEach(vciElement -> {
             System.out.println("[" + vciElement.getString() + "]");
@@ -275,20 +283,24 @@ public class MainViewController {
                     double value = Double.parseDouble(removeFromExecutionStack(ej));
                     String identifier = removeFromExecutionStack(ej);
                     symbolsTable.put(identifier, value);
-                } else if (vciElement.getToken().equals(Token.Enteros) || vciElement.getToken().equals(Token.Identificador)) {
+                } else if (vciElement.getToken().equals(Token.Enteros) || vciElement.getToken().equals(Token.Identificador) || vciElement.getToken().equals(Token.Cadena)) {
                     addToExecutionStack(vciElement.getString(), ej);
                 } else if (vciElement.getToken().equals(Token.Write)) {
                     VciElement nextVciElement = vci.get(i + 1);
                     i++; // saltar siguiente valor
-                    String item = nextVciElement.getString();
-                    double value;
-                    try {
-                        value = Double.parseDouble(item);
-                    } catch (NumberFormatException e) {
-                        value = symbolsTable.get(item);
+
+                    if (nextVciElement.getToken().equals(Token.Cadena)) {
+                        txtOutput.setText(txtOutput.getText() + nextVciElement.getString() + "\n");
+                    } else {
+                        String item = nextVciElement.getString();
+                        double value;
+                        try {
+                            value = Double.parseDouble(item);
+                        } catch (NumberFormatException e) {
+                            value = symbolsTable.get(item);
+                        }
+                        txtOutput.setText(txtOutput.getText() + value + "\n");
                     }
-                    System.out.println("[PANTALLA] " + value);
-                    txtOutput.setText(txtOutput.getText() + value + "\n");
                 } else if (vciElement.getToken().equals(Token.Read)) {
                     i++; // saltar siguiente valor
                 } else if (vciElement.getToken().equals(Token.Then)) {
@@ -305,6 +317,8 @@ public class MainViewController {
             }
         } catch (Exception e) {
             lblError.setVisible(true);
+            lblError.setText("Ha ocurrido un error en la ejecucion");
+            e.printStackTrace();
         }
         System.out.println(symbolsTable);
     }

@@ -38,7 +38,7 @@ THEN {lexeme=yytext(); return Then;}
 ELSE {lexeme=yytext(); return Else;}
 BEGIN {/*Ignore*/}
 END {lexeme=yytext(); return End;}
-WRITE {lexeme=yytext(); return Write;}
+"WRITE" {lexeme=yytext(); return Write;}
 READ {lexeme=yytext(); return Read;}
 {espacio} {/*Ignore*/}
 "//".* {/*Ignore*/}
@@ -72,6 +72,7 @@ READ {lexeme=yytext(); return Read;}
 {D}+ {lexeme=yytext(); return Enteros;}
 ({D}+"."{D}+) {lexeme=yytext(); return Reales;}
 {CA}+ {lexeme=yytext(); return Cadena;}
+"\""([^\"\n]|"\\""\"")*"\"" {lexeme=yytext(); return Cadena;}
 {D}{L}+({L}|{D}|".")* {lexeme=yytext(); return ERROR;}
 {L}+"."+({L}|{D}|".")* {lexeme=yytext(); return ERROR;}
 {D}+"."+({L}|{D}|".")* {lexeme=yytext(); return ERROR;}
@@ -87,6 +88,4 @@ READ {lexeme=yytext(); return Read;}
 "|" {lexeme=yytext(); return ERROR;}
 "&" {lexeme=yytext(); return ERROR;}
 "|" {lexeme=yytext(); return ERROR;}
-{LU}({LU}|{DU})({LU}|{DU})({LU}|{DU})({LU}|{DU})({LU}|{DU})[^\"\n" "]* {lexeme=yytext(); return ERROR;}
-"\""([^\"\n]|"\\""\"")*"\"" {lexeme=yytext(); return Cadena;}
  . {lexeme=yytext(); return ERROR;}
