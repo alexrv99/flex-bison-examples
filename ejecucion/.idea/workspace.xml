@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="vci:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="86d42b45-b8d7-455f-92d2-7dadc20eedd8" name="Default Changelist" comment="Optimiza tests">
+      <change afterPath="$PROJECT_DIR$/src/lexer/LexerElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/archivo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/archivo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/Lexer.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Lexer.flex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Lexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Token.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Arquillian JUnit Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1Rx1hqQWvIVdIgmDh479RaUWo8z" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="true" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569418620979" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="Arquillian JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../../Projects/JavaWorkspace/AlgoPractice" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="lexer" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\JavaWorkspace\lexer\lib" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\JavaWorkspace\lexer\pruebas" />
+      <recent name="D:\Projects\JavaWorkspace\lexer\src\lexer" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Generador" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lexer.Generador" />
+      <module name="lexer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lexer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Lexer" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="lexer.Main" />
+      <module name="lexer" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lexer.Main" />
+      <module name="lexer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lexer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="RunConfigurationTask" enabled="true" run_configuration_name="Generador" run_configuration_type="Application" />
+      </method>
+    </configuration>
+    <configuration name="Tests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="lexer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lexer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lexer" />
+      <option name="MAIN_CLASS_NAME" value="lexer.Tests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.palabrasClave" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="lexer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lexer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lexer" />
+      <option name="MAIN_CLASS_NAME" value="lexer.Tests" />
+      <option name="METHOD_NAME" value="palabrasClave" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Generador" />
+      <item itemvalue="Application.Lexer" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.Tests" />
+      <item itemvalue="JUnit.Tests.palabrasClave" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.Tests" />
+        <item itemvalue="JUnit.Tests.palabrasClave" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="86d42b45-b8d7-455f-92d2-7dadc20eedd8" name="Default Changelist" comment="" />
+      <created>1556908921232</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1556908921232</updated>
+      <workItem from="1556908922801" duration="1731000" />
+      <workItem from="1556910900988" duration="8838000" />
+      <workItem from="1556986903594" duration="740000" />
+      <workItem from="1557084417201" duration="12670000" />
+      <workItem from="1557146392796" duration="20000" />
+      <workItem from="1557192678190" duration="738000" />
+      <workItem from="1557231627506" duration="6742000" />
+      <workItem from="1557327149198" duration="1302000" />
+      <workItem from="1557335742125" duration="11144000" />
+      <workItem from="1557428332776" duration="3334000" />
+      <workItem from="1557462599218" duration="521000" />
+      <workItem from="1569418424385" duration="222000" />
+      <workItem from="1570594077884" duration="4467000" />
+      <workItem from="1570626687203" duration="4308000" />
+      <workItem from="1570720600020" duration="750000" />
+      <workItem from="1570721403304" duration="4773000" />
+      <workItem from="1570757078826" duration="9241000" />
+      <workItem from="1570797011778" duration="3914000" />
+      <workItem from="1573189577907" duration="103000" />
+      <workItem from="1574108757852" duration="14133000" />
+    </task>
+    <task id="LOCAL-00001" summary="Detección de coma">
+      <created>1557094056581</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1557094056582</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Corrige typo">
+      <created>1557094865860</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1557094865860</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Agrega tests de JUnit">
+      <created>1557099156693</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1557099156693</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Renombra Tokens a singular">
+      <created>1557099227824</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1557099227824</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Agrega test">
+      <created>1557099865745</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1557099865745</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Optimiza tests">
+      <created>1557099888306</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1557099888306</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Detección de coma" />
+    <MESSAGE value="Corrige typo" />
+    <MESSAGE value="Agrega tests de JUnit" />
+    <MESSAGE value="Renombra Tokens a singular" />
+    <MESSAGE value="Agrega test" />
+    <MESSAGE value="Optimiza tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimiza tests" />
+  </component>
+</project>

@@ -1,0 +1,6 @@
+A = 10;
+IF (A==10) THEN
+BEGIN
+    A=20+10/2;
+    WRITE(A);
+END
