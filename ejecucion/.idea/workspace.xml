@@ -11,7 +11,10 @@
       <change beforePath="$PROJECT_DIR$/archivo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/archivo.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/Lexer.flex" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Lexer.flex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Lexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/MainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lexer/MainViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/MainViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lexer/VciElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lexer/VciElement.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -209,7 +212,7 @@
       <workItem from="1574108757852" duration="14133000" />
       <workItem from="1574131629194" duration="9143000" />
       <workItem from="1574175222023" duration="6611000" />
-      <workItem from="1574259409920" duration="4669000" />
+      <workItem from="1574259409920" duration="8516000" />
     </task>
     <task id="LOCAL-00001" summary="Detección de coma">
       <created>1557094056581</created>

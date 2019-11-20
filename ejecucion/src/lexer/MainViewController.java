@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.*;
@@ -72,6 +73,8 @@ public class MainViewController {
 
     public void analyze() {
 
+        lblError.setStyle("-fx-text-fill: red");
+        lblError.setVisible(false);
 
         File archivo = new File("archivo.txt");
         PrintWriter printWriter;
@@ -102,6 +105,7 @@ public class MainViewController {
             return;
         }
 
+        elements.forEach(System.out::println);
 
         setVci(generateVci(elements));
 
@@ -113,24 +117,10 @@ public class MainViewController {
         System.out.println(output);
 
 
-        flowPane.getChildren().clear();
-        for (int i = 0; i < vci.size(); i++) {
-            VciElement vciElement = vci.get(i);
-            VBox vBox = new VBox();
-            vBox.setSpacing(5);
-            vBox.setPadding(new Insets(8, 12, 8, 12));
-            vBox.setStyle("-fx-border-color: #c5c5c5; -fx-border-width: 1px; -fx-border-style: solid; -fx-border-radius: 10px");
-            vBox.setAlignment(Pos.CENTER);
-            Label tokenLabel = new Label(vciElement.getString());
-            tokenLabel.setStyle("-fx-font-size: 15px");
-            Label numberLabel = new Label(String.valueOf(i));
-            vBox.getChildren().add(tokenLabel);
-            vBox.getChildren().add(numberLabel);
-            flowPane.getChildren().add(vBox);
-        }
-
         executeCode(getVci(), 0);
 
+        lblError.setText("Terminado");
+        lblError.setStyle("-fx-text-fill: black");
     }
 
     private List<VciElement> generateVci(List<LexerElement> elements) {
@@ -138,6 +128,7 @@ public class MainViewController {
         Stack<VciElement> op = new Stack<>();
         Stack<VciElement> est = new Stack<>();
         Stack<Integer> dir = new Stack<>();
+
         try {
             for (int i = 0; i < elements.size(); i++) {
                 LexerElement element = elements.get(i);
@@ -169,6 +160,14 @@ public class MainViewController {
                     }
                 } else if (token.equals(Token.If)) {
                     est.push(vciElement);
+                } else if (token.equals(Token.While)) {
+                    est.push(vciElement);
+                    dir.push(vci.size());
+                } else if (token.equals(Token.Do)) {
+                    op.clear();
+                    dir.push(vci.size());
+                    vci.add(null);
+                    vci.add(vciElement);
                 } else if (token.equals(Token.Then)) {
                     op.clear();
                     dir.push(vci.size());
@@ -177,17 +176,28 @@ public class MainViewController {
                 } else if (token.equals(Token.Else)) {
                     est.push(vciElement);
                     int position = dir.pop();
-                    vci.set(position, new VciElement(null, String.valueOf(vci.size() + 2), null));
+                    vci.set(position, new VciElement(null, String.valueOf(vci.size() + 2)));
                     dir.push(vci.size());
                     vci.add(null); // token falso
                     vci.add(vciElement); // genera token else
                 } else if (token.equals(Token.End)) {
-                    if ((i + 1) == elements.size()) {
-                        int position = dir.pop();
-                        vci.set(position, new VciElement(null, String.valueOf(vci.size()), null));
-                    } else if (!elements.get(i + 1).getToken().equals(Token.Else)) {
-                        int position = dir.pop();
-                        vci.set(position, new VciElement(null, String.valueOf(vci.size()), null));
+                    VciElement poppedElement = est.pop();
+
+                    if (poppedElement.getToken().equals(Token.While)) {
+                        int poppedDir = dir.pop();
+                        vci.set(poppedDir, new VciElement(null, String.valueOf(vci.size() + 2)));
+                        poppedDir = dir.pop();
+                        vci.add(new VciElement(null, String.valueOf(poppedDir)));
+                        vci.add(new VciElement(Token.EndWhile, "end-while"));
+                    } else if (poppedElement.getToken().equals(Token.If)) {
+                        if ((i + 1) == elements.size()) {
+                            // if its the last element, don't try to get last item
+                            int position = dir.pop();
+                            vci.set(position, new VciElement(null, String.valueOf(vci.size()), null));
+                        } else if (!elements.get(i + 1).getToken().equals(Token.Else)) {
+                            int position = dir.pop();
+                            vci.set(position, new VciElement(null, String.valueOf(vci.size()), null));
+                        }
                     }
 
                 } else if (token.equals(Token.Read) || token.equals(Token.Write)) {
@@ -216,6 +226,24 @@ public class MainViewController {
             lblError.setText("Ha ocurrido un error lexico");
             e.printStackTrace();
         }
+
+
+        flowPane.getChildren().clear();
+        for (int i = 0; i < vci.size(); i++) {
+            VciElement vciElement = vci.get(i);
+            VBox vBox = new VBox();
+            vBox.setSpacing(5);
+            vBox.setPadding(new Insets(8, 12, 8, 12));
+            vBox.setStyle("-fx-border-color: #c5c5c5; -fx-border-width: 1px; -fx-border-style: solid; -fx-border-radius: 10px");
+            vBox.setAlignment(Pos.CENTER);
+            Label tokenLabel = new Label(vciElement.getString());
+            tokenLabel.setStyle("-fx-font-size: 15px");
+            Label numberLabel = new Label(String.valueOf(i));
+            vBox.getChildren().add(tokenLabel);
+            vBox.getChildren().add(numberLabel);
+            flowPane.getChildren().add(vBox);
+        }
+
         return vci;
     }
 
@@ -246,7 +274,7 @@ public class MainViewController {
                 } // operadores binarios
                 else if (vciElement.getToken().getPriority() != null && vciElement.getToken().getPriority() != 0 && vciElement.getToken().getPriority() != 30) {
 
-                    double operand2 = 0;
+                    double operand2;
                     String item = removeFromExecutionStack(ej);
                     try {
                         operand2 = Double.parseDouble(item);
@@ -254,7 +282,7 @@ public class MainViewController {
                         operand2 = symbolsTable.get(item);
                     }
 
-                    double operand1 = 0;
+                    double operand1;
                     item = removeFromExecutionStack(ej);
                     try {
                         operand1 = Double.parseDouble(item);
@@ -350,7 +378,16 @@ public class MainViewController {
                         lblError.setText("Error al c-onvertir " + readInput + " a double");
                         e.printStackTrace();
                     }
-
+                } else if (vciElement.getToken().equals(Token.Do)) {
+                    double pcAux = Double.parseDouble(removeFromExecutionStack(ej));
+                    double vv = Double.parseDouble(removeFromExecutionStack(ej));
+                    if (vv == 0) {
+                        i = (int) pcAux - 1; // minus 1 because the for loop increments already
+                    }
+                } else if (vciElement.getToken().equals(Token.EndWhile)) {
+                    int jumpDir = Integer.parseInt(removeFromExecutionStack(ej));
+                    System.out.println("Jump to" + jumpDir);
+                    i = jumpDir - 1;
                 } else if (vciElement.getToken().equals(Token.Then)) {
                     double pcAux = Double.parseDouble(removeFromExecutionStack(ej));
                     System.out.println("pc_aux: " + pcAux);
@@ -393,13 +430,21 @@ public class MainViewController {
             VBox vBox = (VBox) hBoxStack.getChildren().get(column);
             for (int i = 0; i < stack.size() - 1; i++) {
                 Label stringLabel = new Label();
-                stringLabel.setStyle("-fx-strikethrough: true; -fx-font-size: 16px; -fx-padding: 5px 10px");
+                stringLabel.setPrefWidth(40);
+                stringLabel.setPrefHeight(40);
+                stringLabel.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+                stringLabel.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+                stringLabel.setStyle("-fx-font-size: 14px; -fx-padding: 5px");
                 vBox.getChildren().add(0, stringLabel);
             }
         }
         VBox vBox = (VBox) hBoxStack.getChildren().get(column);
         Label stringLabel = new Label(string);
-        stringLabel.setStyle("-fx-strikethrough: true; -fx-font-size: 16px; -fx-padding: 5px 10px");
+        stringLabel.setPrefWidth(40);
+        stringLabel.setPrefHeight(40);
+        stringLabel.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        stringLabel.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        stringLabel.setStyle("-fx-font-size: 14px; -fx-padding: 5px");
         vBox.getChildren().add(0, stringLabel);
     }
 

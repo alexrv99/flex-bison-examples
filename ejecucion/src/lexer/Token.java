@@ -35,6 +35,9 @@ public enum Token {
     Else(-102, -1),
     End(-103, -1),
     Begin(-104, -1),
+    While(-105, -1),
+    Do(-106, -1),
+    EndWhile(-107, -1),
     Read(-200, -1),
     Write(-201, -1),
     ERROR(-1000, -1);

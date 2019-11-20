@@ -38,7 +38,9 @@ THEN {lexeme=yytext(); return Then;}
 ELSE {lexeme=yytext(); return Else;}
 BEGIN {/*Ignore*/}
 END {lexeme=yytext(); return End;}
-"WRITE" {lexeme=yytext(); return Write;}
+WHILE {lexeme=yytext(); return While;}
+DO {lexeme=yytext(); return Do;}
+WRITE {lexeme=yytext(); return Write;}
 READ {lexeme=yytext(); return Read;}
 {espacio} {/*Ignore*/}
 "//".* {/*Ignore*/}

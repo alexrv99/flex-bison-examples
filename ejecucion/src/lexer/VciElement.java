@@ -5,6 +5,11 @@ public class VciElement {
     private String string;
     private Integer priority;
 
+    public VciElement(Token token, String string) {
+        this.token = token;
+        this.string = string;
+    }
+
     public VciElement(Token token, String string, Integer priority) {
         this.token = token;
         this.string = string;
