@@ -1,9 +1,13 @@
-A = 10;
-IF (A==10) THEN
-BEGIN
-    A=20+10/2;
-    READ(A);
-    WRITE(A);
 
-    WRITE(B);
+I = 0;
+NUM1 = 0;
+NUM2 = 1;
+WRITE(1);
+WHILE (I<30) DO
+BEGIN
+	I = I + 1;
+	SUM = NUM1 + NUM2;
+	NUM1 = NUM2;
+	NUM2 = SUM;	
+	WRITE(SUM);
 END
