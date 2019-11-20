@@ -37,6 +37,14 @@ public class MainViewController {
 
     private boolean poppedLast = false;
 
+    private List<VciElement> vci;
+
+    private HashMap<String, Double> symbolsTable;
+
+    private int instruction;
+
+    private String readInput = "";
+
 
     public void initialize() {
         flowPane.setVgap(10);
@@ -44,6 +52,20 @@ public class MainViewController {
         txtInput.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER && event.isControlDown()) {
                 analyze();
+            }
+        });
+
+        txtOutput.setOnKeyPressed(event -> {
+
+            if (!txtOutput.isEditable()) {
+                return;
+            }
+
+            readInput += event.getText();
+
+            if (event.getCode() == KeyCode.ENTER) {
+                executeCode(vci, instruction);
+                txtOutput.setEditable(false);
             }
         });
     }
@@ -61,10 +83,6 @@ public class MainViewController {
             e.printStackTrace();
         }
 
-        List<VciElement> vci = new ArrayList<>();
-        Stack<VciElement> op = new Stack<>();
-        Stack<VciElement> est = new Stack<>();
-        Stack<Integer> dir = new Stack<>();
 
         List<LexerElement> elements;
         try {
@@ -83,11 +101,44 @@ public class MainViewController {
             e.printStackTrace();
             return;
         }
-        elements.forEach(System.out::println);
 
-        StringBuilder output;
+
+        setVci(generateVci(elements));
+
+        StringBuilder output = new StringBuilder();
+        vci.forEach(vciElement -> {
+            System.out.println("[" + vciElement.getString() + "]");
+            output.append(" [").append(vciElement.getString()).append("]\t").append(vciElement.getToken()).append(" \n");
+        });
+        System.out.println(output);
+
+
+        flowPane.getChildren().clear();
+        for (int i = 0; i < vci.size(); i++) {
+            VciElement vciElement = vci.get(i);
+            VBox vBox = new VBox();
+            vBox.setSpacing(5);
+            vBox.setPadding(new Insets(8, 12, 8, 12));
+            vBox.setStyle("-fx-border-color: #c5c5c5; -fx-border-width: 1px; -fx-border-style: solid; -fx-border-radius: 10px");
+            vBox.setAlignment(Pos.CENTER);
+            Label tokenLabel = new Label(vciElement.getString());
+            tokenLabel.setStyle("-fx-font-size: 15px");
+            Label numberLabel = new Label(String.valueOf(i));
+            vBox.getChildren().add(tokenLabel);
+            vBox.getChildren().add(numberLabel);
+            flowPane.getChildren().add(vBox);
+        }
+
+        executeCode(getVci(), 0);
+
+    }
+
+    private List<VciElement> generateVci(List<LexerElement> elements) {
+        List<VciElement> vci = new ArrayList<>();
+        Stack<VciElement> op = new Stack<>();
+        Stack<VciElement> est = new Stack<>();
+        Stack<Integer> dir = new Stack<>();
         try {
-            output = new StringBuilder();
             for (int i = 0; i < elements.size(); i++) {
                 LexerElement element = elements.get(i);
                 Token token = element.getToken();
@@ -164,52 +215,29 @@ public class MainViewController {
             lblError.setVisible(true);
             lblError.setText("Ha ocurrido un error lexico");
             e.printStackTrace();
-            return;
         }
+        return vci;
+    }
 
-        vci.forEach(vciElement -> {
-            System.out.println("[" + vciElement.getString() + "]");
-            output.append(" [").append(vciElement.getString()).append("]\t").append(vciElement.getToken()).append(" \n");
-        });
-        flowPane.getChildren().clear();
+    private void executeCode(List<VciElement> vci, int startInstruction) {
 
-
-        for (int i = 0; i < vci.size(); i++) {
-            VciElement vciElement = vci.get(i);
-            VBox vBox = new VBox();
-            vBox.setSpacing(5);
-            vBox.setPadding(new Insets(8, 12, 8, 12));
-            vBox.setStyle("-fx-border-color: #c5c5c5; -fx-border-width: 1px; -fx-border-style: solid; -fx-border-radius: 10px");
-            vBox.setAlignment(Pos.CENTER);
+        System.out.println("EXECUTING CODE FROM " + startInstruction);
 
 
-            Label tokenLabel = new Label(vciElement.getString());
-            tokenLabel.setStyle("-fx-font-size: 15px");
-
-            Label numberLabel = new Label(String.valueOf(i));
-            vBox.getChildren().add(tokenLabel);
-            vBox.getChildren().add(numberLabel);
-
-            flowPane.getChildren().add(vBox);
-        }
-        output.append("Completado");
-
-
-        // ############### INICIO DE EJECUCION ###############
-
-        HashMap<String, Double> symbolsTable = null;
         try {
-            hBoxStack.getChildren().clear();
-            txtOutput.clear();
-            column = 0;
+
             lblError.setVisible(false);
-
-
-            symbolsTable = new HashMap<>();
+            if (startInstruction == 0) {
+                symbolsTable = new HashMap<>();
+                hBoxStack.getChildren().clear();
+                txtOutput.clear();
+                column = 0;
+            }
 
             Stack<String> ej = new Stack<>();
 
-            for (int i = 0; i < vci.size(); i++) {
+            for (int i = startInstruction; i < vci.size(); i++) {
+                instruction = i;
                 VciElement vciElement = vci.get(i);
 
 
@@ -290,7 +318,7 @@ public class MainViewController {
                     i++; // saltar siguiente valor
 
                     if (nextVciElement.getToken().equals(Token.Cadena)) {
-                        txtOutput.setText(txtOutput.getText() + nextVciElement.getString() + "\n");
+                        txtOutput.setText(txtOutput.getText() + nextVciElement.getString().replaceAll("\"", "") + "\n");
                     } else {
                         String item = nextVciElement.getString();
                         double value;
@@ -299,10 +327,30 @@ public class MainViewController {
                         } catch (NumberFormatException e) {
                             value = symbolsTable.get(item);
                         }
+                        System.out.println("Prev text: ");
+                        System.out.println(txtOutput.getText());
                         txtOutput.setText(txtOutput.getText() + value + "\n");
                     }
                 } else if (vciElement.getToken().equals(Token.Read)) {
-                    i++; // saltar siguiente valor
+                    if (readInput.isEmpty()) {
+                        txtOutput.setEditable(true);
+                        instruction = i;
+                        break;
+                    }
+
+                    i++; // skip next
+
+
+                    try {
+                        String varName = vci.get(i).getString();
+                        symbolsTable.put(varName, Double.valueOf(readInput));
+                        readInput = "";
+                    } catch (NumberFormatException e) {
+                        lblError.setVisible(true);
+                        lblError.setText("Error al c-onvertir " + readInput + " a double");
+                        e.printStackTrace();
+                    }
+
                 } else if (vciElement.getToken().equals(Token.Then)) {
                     double pcAux = Double.parseDouble(removeFromExecutionStack(ej));
                     System.out.println("pc_aux: " + pcAux);
@@ -358,5 +406,14 @@ public class MainViewController {
     private String removeFromExecutionStack(Stack<String> stack) {
         poppedLast = true;
         return stack.pop();
+    }
+
+
+    public List<VciElement> getVci() {
+        return vci;
+    }
+
+    public void setVci(List<VciElement> vci) {
+        this.vci = vci;
     }
 }

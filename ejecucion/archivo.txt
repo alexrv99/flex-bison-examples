@@ -2,9 +2,10 @@ Y=63;
 X=20;
 IF (Y==63) THEN
 BEGIN
+    WRITE("Ingresa un número: ");
     READ(X);
-    WRITE(X);
     Y = X + 10;
+    WRITE(Y);
 END
 ELSE
 BEGIN
