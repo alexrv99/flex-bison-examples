@@ -1,0 +1,94 @@
+A = 10;
+IF (A==10) THEN
+BEGIN
+    A=20+10/2;
+    READ(A);
+    WRITE(A);
+END
+
+
+---------------
+Y=63;
+X=20;
+IF (Y==63) THEN
+BEGIN
+    WRITE("Ingresa un número: ");
+    READ(X);
+    Y = X + 10;
+    WRITE(Y);
+END
+ELSE
+BEGIN
+    X = 20;
+    Y = X + Y;
+END
+
+----------------------
+i = 1;
+WHILE (i < 5) DO
+BEGIN
+    WRITE(X);
+END
+WRITE("FIN");
+
+
+-----------
+I = 0;
+WHILE (I<10) DO
+BEGIN
+    I = I + 1;
+    WRITE(I);
+END
+
+--------
+
+A = 10;
+IF (K==10) THEN
+BEGIN
+    READ(A);
+    WRITE(A);
+    READ(B);
+    WRITE(B);
+END
+
+
+---------
+
+I = 0;
+NUM1 = 0;
+NUM2 = 1;
+WRITE(1);
+WHILE (I<30) DO
+BEGIN
+	I = I + 1;
+	SUM = NUM1 + NUM2;
+	NUM1 = NUM2;
+	NUM2 = SUM;	
+	WRITE(SUM);
+END
+
+
+-----------
+
+I = 0;
+WHILE () DO
+BEGIN
+	I = I + 1;
+	
+END
+
+
+-----------
+WRITE("¿Cual es tu edad?");
+READ(EDAD);
+WRITE("TU EDAD ES: ");
+WRITE(EDAD);
+
+IF (EDAD < 18) THEN
+BEGIN
+	WRITE("ERES MENOR DE EDAD");
+END
+ELSE
+BEGIN
+	WRITE("ERES UN ADULTO");
+END
